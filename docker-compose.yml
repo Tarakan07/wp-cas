@@ -1,0 +1,55 @@
+version: "3.8"
+
+services:
+  db:
+    image: mysql:5.7
+    container_name: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: airon2931
+      MYSQL_DATABASE: ci40190_kogda
+      MYSQL_USER: root
+      MYSQL_PASSWORD: airon2931
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - mynet
+
+  wordpress:
+    depends_on:
+      - db
+    image: wordpress:5.8
+    container_name: wordpress
+    restart: always
+    ports:
+      - "8000:80"
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: root
+      WORDPRESS_DB_PASSWORD: airon2931
+      WORDPRESS_DB_NAME: ci40190_kogda
+    volumes:
+      - ./wp-content:/var/www/html/wp-content
+      - ./wp-config.php:/var/www/html/wp-config.php
+    networks:
+      - mynet
+
+  phpmyadmin:
+    depends_on:
+      - db
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    restart: always
+    ports:
+      - "8080:80"
+    environment:
+      PMA_HOST: db
+      MYSQL_ROOT_PASSWORD: airon2931
+    networks:
+      - mynet
+
+networks:
+  mynet:
+
+volumes:
+  db_data:
