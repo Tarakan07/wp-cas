@@ -23,13 +23,13 @@
 define('DB_NAME', 'ci40190_kogda');
 
 /** Имя пользователя MySQL */
-define('DB_USER', 'ci40190_kogda');
+define('DB_USER', 'root');
 
 /** Пароль к базе данных MySQL */
-define('DB_PASSWORD', 'airon2931');
+define('DB_PASSWORD', 'root');
 
 /** Имя сервера MySQL */
-define('DB_HOST', 'localhost');
+define('DB_HOST', 'db');
 
 /** Кодировка базы данных для создания таблиц. */
 define('DB_CHARSET', 'utf8mb4');
