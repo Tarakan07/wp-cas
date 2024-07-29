@@ -2,26 +2,18 @@ version: "3.8"
 
 services:
   wordpress:
-    image: wordpress:5.8
+    build: .
     ports:
       - "127.0.0.1:8000:80"
     volumes:
       - ./wp-content:/var/www/html/wp-content
-      - ./wp-config.php:/var/www/html/wp-config.php
     networks:
       - backend
-    command:
-      [
-        "bash",
-        "-c",
-        "apt-get update && apt-get install -y vim && apache2ctl -D FOREGROUND",
-      ]
 
   db:
     image: mysql:5.7
     environment:
       MYSQL_DATABASE: ci40190_kogda
-      MYSQL_USER: root
       MYSQL_ROOT_PASSWORD: root
     volumes:
       - db_data:/var/lib/mysql
